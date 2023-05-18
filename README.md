@@ -1,5 +1,5 @@
 
-# DISCount: Counting in Large Image Collections with Detector-Based Importance Sampling
+## DISCount: Counting in Large Image Collections with Detector-Based Importance Sampling
 
-Python code for k-DISCount.
+Python code for k-DISCount. See demo.
 
