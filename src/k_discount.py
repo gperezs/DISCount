@@ -2,7 +2,7 @@ import numpy as np
 
 
 class kDISCount():
-    def __init__(self, g, eps=1e-4):
+    def __init__(self, g, eps=4e-2):
         '''
         Counting in large image collections with detector-based importance sampling.
 
