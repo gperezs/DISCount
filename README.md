@@ -4,15 +4,15 @@
 Python implementation of [DISCount: Counting in Large Image Collections with Detector-Based Importance Sampling](https://arxiv.org/abs/2306.03151). 
 DISCount is lightweight and simple to use. The input to DISCount is a list with detector counts $$g(s)$$ per unit $$s$$. For instance a list $$g(s)$$ that contains the total number of damaged buildings (according to the detector) per tile $$s$$, or the total number of birds per day, etc. See below how DISCount works:
 
-1. Run an off-the-shelf detector on all units $$s$$ (e.g., image tile from a large region) in the collection $$S$$ (e.g., a large satellite image of a region) to get detector counts $$g(s)$$.
-2. Initialize DISCount using `estimator = kDISCount(g)`. This will compute the proposal distribution $$q \propto g(s)$$ to sample units from.
-3. Get samples from $$q$$ using `samples = estimator.sample(n=10)`, where `samples` is a list of indices of sampled units (e.g., sampled tiles $$s_i$$ from the region $$S$$). 
-4. In practice `samples` is used to retrieve the units to send to human annotators to screen (e.g., on a labeling UI), and get the verified or "true" count per sampled unit $$f(s_i)$$ (e.g., the "true" number of damaged buildings per image tile). 
+1. Run an off-the-shelf detector on all units $s$ (e.g., image tile from a large region) in the collection $S$ (e.g., a large satellite image of a region) to get detector counts $g(s)$.
+2. Initialize DISCount using `estimator = kDISCount(g)`. This will compute the proposal distribution $q \propto g(s)$ to sample units from.
+3. Get samples from $q$ using `samples = estimator.sample(n=10)`, where `samples` is a list of indices of sampled units (e.g., sampled tiles $s_i$ from the region $S$). 
+4. In practice `samples` is used to retrieve the units to send to human annotators to screen (e.g., on a labeling UI), and get the verified or "true" count per sampled unit $f(s_i)$ (e.g., the "true" number of damaged buildings per image tile). 
 5. Then, we load the screened samples to the estimator using `estimator.load(screened_samples)`. Now the estimator is ready to produce count estimates which will depend on the defined regions.
-6. DISCount is not only able to produce total counts on the entire region $$S$$, but also count estimates for multiple regions $$S_i \in \Omega$$ simultaneously ($$k$$-DISCount). Regions are loaded to the estimator as a list $$R$$ of lists $$r_i$$, where $$r_i$$ is a list of indices of the units $$s$$ that comprise the subregion $$S_i$$. Below we give some examples of different regions:
-        - If we want to estimate the total count of the entire region $$S$$ (DISCount), define the region as `regions = [[i for i, _ in enumerate(g)]]`. THis will define a list $$R$$ with a single sublist $$r_0$$ that contains all unit indices.
+6. DISCount is not only able to produce total counts on the entire region $S$, but also count estimates for multiple regions $S_i \in \Omega$ simultaneously ($k$-DISCount). Regions are loaded to the estimator as a list $R$ of lists $r_i$, where $r_i$ is a list of indices of the units $s$ that comprise the subregion $S_i$. Below we give some examples of different regions:
+        - If we want to estimate the total count of the entire region $S$ (DISCount), define the region as `regions = [[i for i, _ in enumerate(g)]]`. THis will define a list $$R$$ with a single sublist $r_0$ that contains all unit indices.
         - If we want to estimate cumulative counts per unit (e.g., cumulative number of birds per day--See demo), define the regions as `regions2 = [[j for j in range(i+1)] for i, _ in enumerate(g)]`.
-7. Finally, we can produce the count estimate(s) using `F_hat, CI = estimator.estimate(regions)` as . `F_hat` are the count estimates $$\hat{F}(S_i)$$ for all subregions, such that `size(regions) == size(F_hat)`. `CI` returns the confidence intervals per count estimate.
+7. Finally, we can produce the count estimate(s) using `F_hat, CI = estimator.estimate(regions)` as . `F_hat` are the count estimates $\hat{F}(S_i)$ for all subregions, such that `size(regions) == size(F_hat)`. `CI` returns the confidence intervals per count estimate.
 
 See [demo](https://github.com/gperezs/DISCount/blob/main/demo.ipynb) for usage with different types of "regions"
 
