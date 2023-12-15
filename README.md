@@ -16,7 +16,7 @@ DISCount is lightweight and simple to use. The input to DISCount is a list with 
 
 See [demo](https://github.com/gperezs/DISCount/blob/main/demo.ipynb) for usage with different types of regions.
 
-# Cite
+## Cite
 If you find this code useful in your research, please consider citing:
 ```
 @misc{perez2023discount,
@@ -29,6 +29,6 @@ If you find this code useful in your research, please consider citing:
 }
 ```
 
-# Acknowledgements
+## Acknowledgements
 We thank Wenlong Zhao for the deployment of the roost detector, Maria Belotti, Yuting Deng, and our Colorado State University AeroEco Lab collaborators for providing the screened data of the Great Lakes radar stations, and Yunfei Luo for facilitating the building detections on the Palu Tsunami region. This work was supported by the National Science Foundation award #2017756.
 
