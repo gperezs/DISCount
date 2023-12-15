@@ -9,9 +9,6 @@ DISCount is lightweight and simple to use. The input to DISCount is a list with 
 3. Get samples from $q$ using `samples = estimator.sample(n=10)`, where `samples` is a list of indices of sampled units (e.g., sampled tiles $s_i$ from the region $S$). 
 4. In practice `samples` is used to retrieve the units to send to human annotators to screen (e.g., on a labeling UI), and get the verified or "true" count per sampled unit $f(s_i)$ (e.g., the "true" number of damaged buildings per image tile). 
 5. Then, we load the screened samples to the estimator using `estimator.load(screened_samples)`. Now the estimator is ready to produce count estimates which will depend on the defined regions.
-6. DISCount is not only able to produce total counts on the entire region $S$, but also count estimates for multiple regions $S_i \in \Omega$ simultaneously ($k$-DISCount). Regions are loaded to the estimator as a list $R$ of lists $r_i$, where $r_i$ is a list of indices of the units $s$ that comprise the subregion $S_i$. Below we give some examples of different regions:
-	* If we want to estimate the total count of the entire region $S$ (DISCount), define the region as `regions = [[i for i, _ in enumerate(g)]]`. This will define a list $R$ with a single sublist $r_0$ that contains all unit indices.
-	* If we want to estimate cumulative counts per unit (e.g., cumulative number of birds per day--See demo), define the regions as `regions = [[j for j in range(i+1)] for i, _ in enumerate(g)]`.
 7. Finally, we can produce the count estimate(s) using `F_hat, CI = estimator.estimate(regions)`. `F_hat` are the count estimates $\hat{F}(S_i)$ for all subregions (`size(regions) == size(F_hat)`). `CI` returns the confidence intervals per count estimate.
 
 See [demo](https://github.com/gperezs/DISCount/blob/main/demo.ipynb) for usage with different types of regions.
