@@ -2,7 +2,11 @@
 ### Counting in Large Image Collections with Detector-Based Importance Sampling
 
 Python implementation of [DISCount: Counting in Large Image Collections with Detector-Based Importance Sampling](https://arxiv.org/abs/2306.03151). 
-DISCount is lightweight and simple to use. The input to DISCount is a list with detector counts $g(s)$ per unit $s$. For instance a list $g(s)$ that contains the total number of damaged buildings (according to the detector) per tile $s$, or the total number of birds per day, etc. See below how DISCount works:
+DISCount is lightweight and simple to use. The input to DISCount is a list with detector counts $g(s)$ per unit $s$. For instance a list $g(s)$ that contains the total number of damaged buildings (according to the detector) per tile $s$, or the total number of birds per day, etc. 
+
+![title_image](pipeline.jpg)
+
+See below how DISCount works:
 
 1. Run an off-the-shelf detector on all units $s$ (e.g., image tile from a large region) in the collection $S$ (e.g., a large satellite image of a region) to get detector counts $g(s)$.
 2. Initialize DISCount using `estimator = kDISCount(g)`. This will compute the proposal distribution $q \propto g(s)$ to sample units from.
